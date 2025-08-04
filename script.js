@@ -10,28 +10,20 @@ const finalMessageRevealWord = document.getElementById(
 const figureParts = document.querySelectorAll(".figure-part");
 
 const words = [
-  "application",
-  "programming",
-  "interface",
-  "wizard",
-  "element",
-  "prototype",
-  "callback",
-  "undefined",
-  "arguments",
-  "settings",
-  "selector",
-  "container",
-  "instance",
-  "response",
-  "console",
-  "constructor",
-  "token",
-  "function",
-  "return",
-  "length",
-  "type",
-  "node",
+  "eth",
+  "defi",
+  "os",
+  "reward",
+  "early",
+  "air",
+  "trade",
+  "communicate",
+  "sandbox",
+  "ux",
+  "social",
+  "create",
+
+  
 ];
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
@@ -55,7 +47,7 @@ function displayWord() {
     `; // to string
   const innerWord = wordElement.innerText.replace(/\n/g, "");
   if (innerWord === selectedWord) {
-    finalMessage.innerText = "Congratulations! You won! 😃";
+    finalMessage.innerText = "Congratulations! Your Codes is = GJ6YKG7U (just for fun) 😃";
     finalMessageRevealWord.innerText = "";
     popup.style.display = "flex";
     playable = false;
@@ -74,8 +66,8 @@ function updateWrongLettersElement() {
       : (part.style.display = "none");
   });
   if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = "Unfortunately you lost. 😕";
-    finalMessageRevealWord.innerText = `...the word was: ${selectedWord}`;
+    finalMessage.innerText = "you had 6 attempts and you failed, Damn you k*ll the stickman. 😕";
+    finalMessageRevealWord.innerText = `the correct answer is : ${selectedWord}`;
     popup.style.display = "flex";
     playable = false;
   }
