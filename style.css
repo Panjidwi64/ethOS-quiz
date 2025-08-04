@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
 :root {
-  --primary-color: #1f2f61;
-  --secondary-color: #224ca4;
-  --light-color: #a7c2da;
+  --primary-color: #ffffff;
+  --secondary-color: #acc2f2;
+  --light-color: #000000;
 }
 
 * {
@@ -23,11 +23,32 @@ body {
   margin: 0;
 }
 
+.logo {
+  width: 120px;
+  height: auto;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+/* 🔁 BOUNCING TEXT ANIMATION */
 h1 {
   margin: 20px 0 0;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
+  animation: bounce 1s infinite;
 }
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+
 
 h2,
 h3 {
@@ -144,4 +165,52 @@ h3 {
 
 .notification-container p {
   margin: 0;
+}
+
+/* ===================== Responsive for Mobile ===================== */
+@media (max-width: 600px) {
+  body {
+    padding: 20px;
+    height: auto;
+    overflow: auto;
+  }
+
+  .logo {
+    width: 80px;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 18px;
+    letter-spacing: 0.2rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .game-container {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  svg.figure-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .letter {
+    font-size: 24px;
+    height: 40px;
+    width: 18px;
+  }
+
+  .notification-container {
+    font-size: 12px;
+    padding: 10px 15px;
+    bottom: -50px;
+  }
 }
