@@ -4,10 +4,9 @@ const playAgainButton = document.getElementById("play-button");
 const popup = document.getElementById("popup-container");
 const notification = document.getElementById("notification-container");
 const finalMessage = document.getElementById("final-message");
-const finalMessageRevealWord = document.getElementById(
-  "final-message-reveal-word"
-);
-const figureParts = document.querySelectorAll(".figure-part");
+const finalMessageRevealWord = document.getElementById("final-message-reveal-word");
+const emojiFace = document.getElementById("emoji-face");
+const hiddenInput = document.getElementById("hidden-input");
 
 const words = [
   "eth",
@@ -21,53 +20,53 @@ const words = [
   "sandbox",
   "ux",
   "social",
-  "create",
-
-  
+  "create"
 ];
+
 let selectedWord = words[Math.floor(Math.random() * words.length)];
-
 let playable = true;
-
 const correctLetters = [];
 const wrongLetters = [];
 
 function displayWord() {
   wordElement.innerHTML = `
     ${selectedWord
-      .split("") // to array
+      .split("")
       .map(
         (letter) => `
-    <span class="letter">
-    ${correctLetters.includes(letter) ? letter : ""}
-    </span>
+      <span class="letter">
+        ${correctLetters.includes(letter) ? letter : ""}
+      </span>
     `
       )
-      .join("")} 
-    `; // to string
+      .join("")}
+  `;
+
   const innerWord = wordElement.innerText.replace(/\n/g, "");
   if (innerWord === selectedWord) {
-    finalMessage.innerText = "Congratulations! Your Codes is = GJ6YKG7U (just for fun) 😃";
+    finalMessage.innerText = "Congratulations! Your Code is = GJ6YKG7U (just for fun) 😃";
     finalMessageRevealWord.innerText = "";
     popup.style.display = "flex";
     playable = false;
   }
 }
 
+function updateEmojiFace() {
+  const sadEmojis = "😞".repeat(wrongLetters.length);
+  emojiFace.innerText = sadEmojis;
+}
+
 function updateWrongLettersElement() {
   wrongLettersElement.innerHTML = `
-  ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
-  ${wrongLetters.map((letter) => `<span>${letter}</span>`)}
+    ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
+    ${wrongLetters.map((letter) => `<span>${letter}</span>`).join("")}
   `;
-  figureParts.forEach((part, index) => {
-    const errors = wrongLetters.length;
-    index < errors
-      ? (part.style.display = "block")
-      : (part.style.display = "none");
-  });
-  if (wrongLetters.length === figureParts.length) {
-    finalMessage.innerText = "you had 6 attempts and you failed, Damn you k*ll the stickman. 😕";
-    finalMessageRevealWord.innerText = `the correct answer is : ${selectedWord}`;
+
+  updateEmojiFace();
+
+  if (wrongLetters.length === 6) {
+    finalMessage.innerText = "You had 6 attempts and you failed 😞😞😞";
+    finalMessageRevealWord.innerText = `The correct answer is: ${selectedWord}`;
     popup.style.display = "flex";
     playable = false;
   }
@@ -80,28 +79,34 @@ function showNotification() {
   }, 2000);
 }
 
-window.addEventListener("keypress", (e) => {
-  if (playable) {
-    const letter = e.key.toLowerCase();
-    if (letter >= "a" && letter <= "z") {
-      if (selectedWord.includes(letter)) {
-        if (!correctLetters.includes(letter)) {
-          correctLetters.push(letter);
-          displayWord();
-        } else {
-          showNotification();
-        }
+// MOBILE/Universal input support
+hiddenInput.addEventListener("input", (e) => {
+  if (!playable) return;
+  const letter = e.target.value.toLowerCase();
+  hiddenInput.value = "";
+
+  if (letter >= "a" && letter <= "z") {
+    if (selectedWord.includes(letter)) {
+      if (!correctLetters.includes(letter)) {
+        correctLetters.push(letter);
+        displayWord();
       } else {
-        if (!wrongLetters.includes(letter)) {
-          wrongLetters.push(letter);
-          updateWrongLettersElement();
-        } else {
-          showNotification();
-        }
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+        updateWrongLettersElement();
+      } else {
+        showNotification();
       }
     }
   }
 });
+
+// Auto focus on input
+window.addEventListener("load", () => hiddenInput.focus());
+window.addEventListener("click", () => hiddenInput.focus());
 
 playAgainButton.addEventListener("click", () => {
   playable = true;
@@ -110,8 +115,8 @@ playAgainButton.addEventListener("click", () => {
   selectedWord = words[Math.floor(Math.random() * words.length)];
   displayWord();
   updateWrongLettersElement();
+  emojiFace.innerText = "";
   popup.style.display = "none";
 });
 
-// Init
 displayWord();
