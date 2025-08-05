@@ -5,38 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>NEED CODE FOR ETH OS?</title>
-
-   
     <link rel="icon" href="https://i.ibb.co/M6KTWnf/pic.jpg" />
   </head>
   <body>
     <img src="logo.png" alt="Logo" class="logo" />
     <h1>Become Early Access</h1>
-    <h1>Make sure you're following <a href="https://x.com/Ethereum_OS">@Ethereum_OS</a></h1>
-    <p >Find the hidden word, For hint go to <a href="https://ethos.vision/">ethos.vision</a> and read all about Eth OS Documentation - then write the hidden word (NOT OFFICIAL, JUST FOR FUN)</p>
+    <h1>
+      Make sure you're following
+      <a href="https://x.com/Ethereum_OS">@Ethereum_OS</a>
+    </h1>
+    <p>
+      Find the hidden word, For hint go to
+      <a href="https://ethos.vision/">ethos.vision</a> and read all about Eth OS
+      Documentation – then write the hidden word (NOT OFFICIAL, JUST FOR FUN)
+    </p>
+
     <div class="game-container">
-      <svg height="250" width="200" class="figure-container">
-        <!-- rod -->
-        <line x1="60" y1="20" x2="140" y2="20" />
-        <line x1="140" y1="20" x2="140" y2="50" />
-        <line x1="60" y1="20" x2="60" y2="230" />
-        <line x1="20" y1="230" x2="100" y2="230" />
-        <!-- head -->
-        <circle cx="140" cy="70" r="20" class="figure-part" />
-        <!-- body -->
-        <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
-        <!-- arms -->
-        <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
-        <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
-        <!-- legs -->
-        <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
-        <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
-      </svg>
+      <!-- Emoji Stickman -->
+      <div id="emoji-face" class="emoji-face"></div>
+
+      <!-- Word to guess -->
+      <div class="word" id="word"></div>
+
+      <!-- Wrong letters -->
       <div class="wrong-letters-container">
         <div id="wrong-letters"></div>
       </div>
-      <div class="word" id="word"></div>
     </div>
+
+    <!-- Hidden input for mobile -->
+    <input
+      type="text"
+      id="hidden-input"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+    />
+
     <!-- Popup -->
     <div class="popup-container" id="popup-container">
       <div class="popup">
@@ -45,10 +51,12 @@
         <button id="play-button">Play Again</button>
       </div>
     </div>
+
     <!-- Notification -->
     <div class="notification-container" id="notification-container">
       <p>Are you kidding? The letters you just entered are wrong.</p>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>
